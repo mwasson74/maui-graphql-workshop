@@ -17,6 +17,10 @@ builder.Services
     .AddSorting()
     .RegisterDbContext<AssetContext>(DbContextKind.Pooled);
 
+builder.Services
+  .AddHttpClient(Constants.PriceInfoService,
+    c => c.BaseAddress = new("https://ccc-workshop-eu-functions.azurewebsites.net"));
+
 var app = builder.Build();
 
 app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());

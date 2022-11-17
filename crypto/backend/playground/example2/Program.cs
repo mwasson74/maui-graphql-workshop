@@ -9,7 +9,13 @@ builder.Services
     .AddPooledDbContextFactory<AssetContext>(o => o.UseSqlite("Data Source=assets.db"));
 
 builder.Services
-    .AddGraphQLServer();
+  .AddGraphQLServer()
+  .AddGlobalObjectIdentification()
+  .AddQueryType<Query>()
+  .AddAssetTypes()
+  .AddFiltering()
+  .AddSorting()
+  .RegisterDbContext<AssetContext>(DbContextKind.Pooled);
 
 var app = builder.Build();
 
